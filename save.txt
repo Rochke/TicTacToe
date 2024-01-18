@@ -1,0 +1,4 @@
+hd = 0;
+spfx = 1;
+music = 1;
+sfx = 1;
