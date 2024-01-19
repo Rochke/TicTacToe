@@ -8,4 +8,4 @@ Qt Multimedia Module Required For Installation
 GPL-3.0 License
 See LICENSE file for more information.
 
-![Missing Image]("https://i.imgur.com/XnT7CPh.png")
+![Missing Image](https://i.imgur.com/XnT7CPh.png)
