@@ -60,7 +60,7 @@ void MainWindow::initButtons() {
 
 void MainWindow::initSideBar() {
     QSpacerItem *spacer = new QSpacerItem(10, 1000, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    ImageButton *settings = new ImageButton(QPixmap(":/Resources/SettingsLR.png"));
+    ImageButton *settings = new ImageButton(QPixmap(":/Resources/Settings.png"));
     QLabel *scoreboard = new QLabel(this);
     QLabel *titlecard = new QLabel(this);
     settings->setFixedSize(250, 100);
@@ -216,7 +216,6 @@ void MainWindow::saveClicked(){
 }
 
 void MainWindow::readSave(){
-    qDebug() << saveFilePath;
     std::ifstream save(saveFilePath.toStdString());
     if(!save){
         error("save.txt failed to open! (readSave()");
@@ -362,7 +361,7 @@ void MainWindow::initAnimations() {
     retryBGOut->setLoopCount(1);
 
     QLabel *retryLabel = new QLabel(this);
-    QPixmap retryPixmap(":/Resources/RetryUIDebug.png");
+    QPixmap retryPixmap(":/Resources/RetryUI.png");
     retryLabel->setScaledContents(true);
     retryLabel->setPixmap(retryPixmap);
     retryLabel->setAttribute(Qt::WA_TranslucentBackground);
