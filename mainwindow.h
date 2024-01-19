@@ -72,6 +72,7 @@ private:
     void readSave();
     void loadSave();
     enum boxStatus { EMPTY = 0, PLAYER_OCCUPIED, CPU_OCCUPIED };
+    QString saveFilePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/save.txt";
     boxStatus getBoxStatus(int index){
         boxStatus temp = static_cast<boxStatus>(buttons[index]->property("boxStatus").toInt());
         return temp;

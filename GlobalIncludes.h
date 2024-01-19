@@ -19,3 +19,4 @@
 #include <QSequentialAnimationGroup>
 #include <QFile>
 #include <QTimer>
+#include <QStandardPaths>

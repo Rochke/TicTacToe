@@ -201,7 +201,7 @@ void MainWindow::saveClicked(){
     spfx = unsavedspfx;
     music = unsavedmusic;
     sfx = unsavedsfx;
-    std::ofstream save("C:/Users/robin/Desktop/Code/QtTicTacToe/save.txt", std::ios::out | std::ios::trunc);
+    std::ofstream save(saveFilePath.toStdString(), std::ios::out | std::ios::trunc);
     if(!save) {
         error("save.txt failed to open! (saveClicked())");
     }
@@ -216,7 +216,8 @@ void MainWindow::saveClicked(){
 }
 
 void MainWindow::readSave(){
-    std::ifstream save("C:/Users/robin/Desktop/Code/QtTicTacToe/save.txt");
+    qDebug() << saveFilePath;
+    std::ifstream save(saveFilePath.toStdString());
     if(!save){
         error("save.txt failed to open! (readSave()");
     }
@@ -519,8 +520,6 @@ void MainWindow::buttonClicked() {
         break;
     }
 }
-
-
 
 void MainWindow::showRetry() {
     if(userPoints == 3 || cpuPoints == 3) {
