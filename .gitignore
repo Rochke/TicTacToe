@@ -1,0 +1,160 @@
+# Qt Creator specific files
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.qmlproject.user
+*.qmlproject.user.*
+*.autosave
+
+# Object files
+*.o
+*.obj
+*.Plo
+*.lo
+
+# Linker output
+*.so
+*.dll
+*.dylib
+*.a
+*.la
+*.lai
+*.exp
+*.ilk
+*.lib
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Debug files
+*.pdb
+*.mdb
+*.idb
+*.tlog
+*.lastbuildstate
+
+# Qt generated files
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+
+# Qt Creator auto generated files
+ui_*.h
+*_plugin_import.cpp
+
+# Build folders (Qt standard pattern)
+build*/
+debug*/
+release*/
+
+# Incremental Linking files
+*.ilk
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Object files
+*.o
+*.obj
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Qt's intermediate build files
+*.moc
+*.moc_predefs.h
+moc_*.cpp
+*.qrc.cpp
+*.qrc.depends
+*.qrc.o
+*.ui.h
+*.ui.cpp
+*.ui.depends
+*.ui.la
+*.ui.o
+*.ui.obj
+*.ui_plugin_import.cpp
+
+# Qt's qmake generated files
+Makefile*
+*.make
+*.qmake.cache
+*.qmake.stash
+qmake.depends
+qmake.generated
+qmake.Qmake2.depends
+qmake.Qmake2.generated
+
+# Qt's D-Bus generated files
+qdbus_*.h
+qdbus_*.cpp
+
+# Qt's Designer plugin files
+*.pro.shared
+*.pro.user
+*.qbs.shared
+*.qbs.user
+
+# QtWebKit generated files
+*.qmlcache
+*.jsc
+
+# Others
+*.qws
+*.qpa
+*.log
+*.nvram
+*.tmp
+*.swp
+.DS_Store
+._*
+*~
+
+# CMake build directory
+cmake-build-*/
+
+# Visual Studio Code
+.vscode/
+
+# Ignore CMake settings
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+*.cmake
+!CMakeLists.txt
+
+# Ignore heavy 3rd party folders
+3rdparty/
+vendors/
