@@ -4,10 +4,8 @@
         <file>Resources/Circle.png</file>
         <file>Resources/X.png</file>
         <file>Resources/Settings.png</file>
-        <file>Resources/SettingsLR.png</file>
         <file>Resources/favicon.ico</file>
         <file>Resources/scoreboard.png</file>
-        <file>Resources/scoreboardLR.png</file>
         <file>Resources/point.png</file>
         <file>Resources/pointBG.png</file>
         <file>Resources/point.gif</file>
@@ -15,7 +13,6 @@
         <file>Resources/SettingsUI.png</file>
         <file>Resources/Ok.png</file>
         <file>Resources/Save.png</file>
-        <file>Resources/SettingsUIDebug.png</file>
         <file>Resources/SettingsButton1.png</file>
         <file>Resources/SettingsButton2.png</file>
         <file>save.txt</file>
@@ -29,7 +26,6 @@
         <file>Resources/SaveComplete.png</file>
         <file>Resources/SettingsButtonFaded.png</file>
         <file>Resources/RetryUI.png</file>
-        <file>Resources/RetryUIDebug.png</file>
         <file>Resources/RetryNo.png</file>
         <file>Resources/RetryYes.png</file>
         <file>Resources/retryBG.png</file>
