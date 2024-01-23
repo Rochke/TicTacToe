@@ -1,12 +1,12 @@
 # V1.03 :
-Added Tie SPFX.
-Added SFX To Retry Buttons And Buttons Within Settings.
-Added Window Icon To Setting Menu.
-Changed Retry Buttons To Be Invisible For A Better Look.
-Changed Retry UI Slightly.
-Updated README Image Positioning.
-Reduced Animation Duration For Exit Of Retry Buttons And The Fade-Out Of The Background.
-Removed Resource Files To Reduce File Size.
+Added Tie SPFX.  
+Added SFX To Retry Buttons And Buttons Within Settings.  
+Added Window Icon To Setting Menu.  
+Changed Retry Buttons To Be Invisible For A Better Look.  
+Changed Retry UI Slightly.  
+Updated README Image Positioning.  
+Reduced Animation Duration For Exit Of Retry Buttons And The Fade-Out Of The Background.  
+Removed Resource Files To Reduce File Size.  
 General Code Improvements For Performance And Readability.
 
 # V1.02 :
