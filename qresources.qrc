@@ -26,8 +26,7 @@
         <file>Resources/SaveComplete.png</file>
         <file>Resources/SettingsButtonFaded.png</file>
         <file>Resources/RetryUI.png</file>
-        <file>Resources/RetryNo.png</file>
-        <file>Resources/RetryYes.png</file>
         <file>Resources/retryBG.png</file>
+        <file>Resources/spfxTie.png</file>
     </qresource>
 </RCC>

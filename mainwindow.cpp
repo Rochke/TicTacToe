@@ -123,6 +123,7 @@ void MainWindow::initSideBar() {
 void MainWindow::settingsClicked() {
     if(sfx) mediaplayer->play(QUrl("qrc:/Resources/bpress.mp3"));
     QDialog *settings = new QDialog;
+    settings->setWindowIcon(QIcon(":/Resources/favicon.ico"));
     settings->setWindowTitle("Settings");
     settings->setModal(true);
     QLabel *settingsui = new QLabel(settings);
@@ -172,23 +173,24 @@ void MainWindow::settingsClicked() {
 }
 
 void MainWindow::sButtonClicked(){
+    if(sfx) mediaplayer->play(QUrl("qrc:/Resources/bpress.mp3"));
     ImageButton* clickedButton = qobject_cast<ImageButton*>(sender());
     /*if (clickedButton == sbutton1) {
         if(unsavedhd) unsavedhd = false;
         else unsavedhd = true;
         if(!unsavedhd) sbutton1->setNewPixmap(QPixmap(":/Resources/SettingsButton1.png"));
         else sbutton1->setNewPixmap(QPixmap(":/Resources/SettingsButton2.png"));
-    }*/if (clickedButton == sbutton2) {
+    }*/ if (clickedButton == sbutton2) {
         if(unsavedspfx) unsavedspfx = false;
         else unsavedspfx = true;
         if(!unsavedspfx) sbutton2->setNewPixmap(QPixmap(":/Resources/SettingsButton1.png"));
         else sbutton2->setNewPixmap(QPixmap(":/Resources/SettingsButton2.png"));
-    }if (clickedButton == sbutton3) {
+    } if (clickedButton == sbutton3) {
         if(unsavedmusic) unsavedmusic = false;
         else unsavedmusic = true;
         if(!unsavedmusic) sbutton3->setNewPixmap(QPixmap(":/Resources/SettingsButton1.png"));
         else sbutton3->setNewPixmap(QPixmap(":/Resources/SettingsButton2.png"));
-    }if (clickedButton == sbutton4) {
+    } if (clickedButton == sbutton4) {
         if(unsavedsfx) unsavedsfx = false;
         else unsavedsfx = true;
         if(!unsavedsfx) sbutton4->setNewPixmap(QPixmap(":/Resources/SettingsButton1.png"));
@@ -338,6 +340,23 @@ void MainWindow::initAnimations() {
     userPointGain->setEasingCurve(QEasingCurve::InOutQuad);
     userPointGain->setLoopCount(1);
 
+    QLabel *tiedLabel = new QLabel(this);
+    QPixmap tiedPixmap(":/Resources/spfxTie.png");
+    tiedLabel->setScaledContents(true);
+    tiedLabel->setPixmap(tiedPixmap);
+    tiedLabel->setAttribute(Qt::WA_TranslucentBackground);
+    tiedLabel->setGeometry(265, 10, 900 / 2, 900 / 2);
+    QGraphicsOpacityEffect* opacityEffectTie = new QGraphicsOpacityEffect(tiedLabel);
+    tiedLabel->setGraphicsEffect(opacityEffectTie);
+    tiedLabel->hide();
+    tied = new QPropertyAnimation(opacityEffectTie, "opacity");
+    tied->setDuration(300);
+    tied->setStartValue(0);
+    tied->setKeyValueAt(0.4, 0.8);
+    tied->setEndValue(0);
+    tied->setEasingCurve(QEasingCurve::InOutQuad);
+    tied->setLoopCount(1);
+
     QPixmap retryBGPixmap(":/Resources/retryBG.png");
     QLabel* retryBGLabel = new QLabel(this);
     retryBGLabel->setPixmap(retryBGPixmap);
@@ -354,7 +373,7 @@ void MainWindow::initAnimations() {
     retryBGIn->setEasingCurve(QEasingCurve::InOutQuad);
     retryBGIn->setLoopCount(1);
     retryBGOut = new QPropertyAnimation(opacityEffectRetry, "opacity");
-    retryBGOut->setDuration(750);
+    retryBGOut->setDuration(400);
     retryBGOut->setStartValue(1);
     retryBGOut->setEndValue(0);
     retryBGOut->setEasingCurve(QEasingCurve::InOutQuad);
@@ -392,6 +411,13 @@ void MainWindow::initAnimations() {
         }
     });
     connect(userPointGain, &QPropertyAnimation::finished, userPointLabel, &QLabel::hide);
+
+    connect(tied, &QPropertyAnimation::stateChanged, this, [tiedLabel](QAbstractAnimation::State newState, QAbstractAnimation::State oldState) {
+        if (newState == QAbstractAnimation::Running && oldState != QAbstractAnimation::Running) {
+            tiedLabel->show();
+        }
+    });
+    connect(tied, &QPropertyAnimation::finished, tiedLabel, &QLabel::hide);
 
     connect(retryBGIn, &QPropertyAnimation::stateChanged, this, [retryBGLabel](QAbstractAnimation::State newState, QAbstractAnimation::State oldState) {
         if (newState == QAbstractAnimation::Running && oldState != QAbstractAnimation::Running) {
@@ -435,19 +461,29 @@ bool MainWindow::winCheck() {
     int win = winCheckLogic();
     if(win == 1) {
         userPoints++;
+        if(spfx) userPointGain->start();
+        /*if(userPoints != 3) {
+            if(sfx) mediaplayer->play(QUrl("qrc:/Resources/coin.wav"));
+        }*/
+        if(sfx) mediaplayer->play(QUrl("qrc:/Resources/coin.wav"));
         updatePoints();
         showRetry();
         return 1;
     }
     else if(win == 0) {
         cpuPoints++;
+        if(spfx) cpuPointGain->start();
+        /*if(cpuPoints != 3) {
+            if(sfx) mediaplayer->play(QUrl("qrc:/Resources/coincpu.mp3"));
+        }*/
+        if(sfx) mediaplayer->play(QUrl("qrc:/Resources/coincpu.mp3"));
         updatePoints();
         showRetry();
         return 1;
     }
     bool tie = tieCheck();
     if(tie){
-        updatePoints();
+        if(spfx) tied->start();
         showRetry();
         return 1;
     }
@@ -459,19 +495,11 @@ void MainWindow::updatePoints() {
     if(userPoints != previousUserPoints && userPoints != 0) {
         if(spfx) pointGifs[userPoints - 1]->show();
         else pointNoSPFXs[userPoints - 1]->show();
-        if(userPoints != 3) {
-            if(sfx) mediaplayer->play(QUrl("qrc:/Resources/coin.wav"));
-        }
-        if(spfx) userPointGain->start();
         previousUserPoints = userPoints;
     }
     if(cpuPoints != previousCpuPoints && cpuPoints != 0 ) {
         if(spfx) pointGifs[cpuPoints + 2]->show();
         else pointNoSPFXs[cpuPoints + 2]->show();
-        if(cpuPoints != 3) {
-            if(sfx) mediaplayer->play(QUrl("qrc:/Resources/coincpu.mp3"));
-        }
-        if(spfx) cpuPointGain->start();
         previousCpuPoints = cpuPoints;
     }
 }
@@ -524,13 +552,13 @@ void MainWindow::showRetry() {
     if(userPoints == 3 || cpuPoints == 3) {
         retryBGIn->start();
         retryIn->start();
-        QPixmap retryYesPixmap(":/Resources/RetryYes.png");
-        QPixmap retryNoPixmap(":/Resources/RetryNo.png");
-        retryYes = new ImageButton(retryYesPixmap, this);
-        retryNo = new ImageButton(retryNoPixmap, this);
+        retryYes = new QPushButton(this);
+        retryNo = new QPushButton(this);
         retryYes->setObjectName("retryYes");
         retryYes->setGeometry(304, 210, 262 / 2, 130 / 2);
         retryNo->setGeometry(545, 158, 262 / 2, 130 / 2);
+        retryYes->setStyleSheet("background-color: rgba(0, 0, 0, 0);");
+        retryNo->setStyleSheet("background-color: rgba(0, 0, 0, 0);");
 
         connect(retryYes, &QPushButton::clicked, this, &MainWindow::retryButtonClicked);
         connect(retryNo, &QPushButton::clicked, this, &MainWindow::retryButtonClicked);
@@ -542,15 +570,16 @@ void MainWindow::showRetry() {
     }
     else {
         for(unsigned long long i = 0; i < buttons.size(); i++) {
-        buttons[i]->setProperty("boxStatus", EMPTY);
-        buttons[i]->setNewPixmap(QPixmap(":/Resources/buttonBG.png"));
+            buttons[i]->setProperty("boxStatus", EMPTY);
+            buttons[i]->setNewPixmap(QPixmap(":/Resources/buttonBG.png"));
         }
     }
 }
 
 void MainWindow::retryButtonClicked() {
-    ImageButton* clickedButton = qobject_cast<ImageButton*>(sender());
+    QPushButton* clickedButton = qobject_cast<QPushButton*>(sender());
     if(clickedButton->objectName() == "retryYes") {
+        if(sfx) mediaplayer->play(QUrl("qrc:/Resources/bpress.mp3"));
         retryBGOut->start();
         retryOut->start();
         for(unsigned long long i = 0; i < buttons.size(); i++) {

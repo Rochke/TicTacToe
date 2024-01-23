@@ -45,11 +45,12 @@ private:
     ImageButton* sbutton2;
     ImageButton* sbutton3;
     ImageButton* sbutton4;
-    ImageButton *retryYes;
-    ImageButton *retryNo;
+    QPushButton *retryYes;
+    QPushButton *retryNo;
 
     QPropertyAnimation *userPointGain;
     QPropertyAnimation *cpuPointGain;
+    QPropertyAnimation *tied;
     QPropertyAnimation *retryIn;
     QPropertyAnimation *retryOut;
     QPropertyAnimation *retryBGIn;
